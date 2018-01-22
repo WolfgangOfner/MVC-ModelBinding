@@ -1,0 +1,37 @@
+﻿@model IList<string>
+
+@{
+    ViewBag.Title = "Names";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Cities</h2>
+
+<form>
+    @if (!Model.Any())
+    {
+        using (Html.BeginForm())
+        {
+            for (var i = 0; i < 3; i++)
+            {
+                <div class="form-group">
+                    <label>City @(i + 1)</label>
+                    @Html.TextBox("cities", null, new { @class ="form-control" })
+                </div>
+            }
+
+            <button class="btn btn-primary" type="submit">Submit</button>
+        }
+    }
+    else
+    {
+        foreach (var cities in Model)
+        {
+            <div class="form-group">
+                <label class="form-control">@cities</label>
+            </div>
+        }
+
+        @Html.ActionLink("Back", "Cities");
+    }
+</form>
